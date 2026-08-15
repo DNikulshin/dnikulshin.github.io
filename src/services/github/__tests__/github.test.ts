@@ -1,4 +1,4 @@
-import { getPinnedRepos } from '../index';
+import { fetchPinnedRepos } from '../client';
 import { RepositorySchema } from '../_types';
 
 global.fetch = jest.fn();
@@ -27,7 +27,7 @@ describe('GitHub Service', () => {
       }),
     });
 
-    const repos = await getPinnedRepos();
+    const repos = await fetchPinnedRepos();
     expect(repos).toHaveLength(1);
     expect(repos[0].name).toBe('docbrain');
     expect(() => RepositorySchema.parse(repos[0])).not.toThrow();
@@ -35,6 +35,6 @@ describe('GitHub Service', () => {
 
   it('throws on API error', async () => {
     (fetch as jest.Mock).mockResolvedValue({ ok: false, status: 403 });
-    await expect(getPinnedRepos()).rejects.toThrow('GitHub API error: 403');
+    await expect(fetchPinnedRepos()).rejects.toThrow('GitHub API error: 403');
   });
 });
