@@ -1,11 +1,13 @@
 name: Deploy to GitHub Pages
 
 on:
-  push:
-    branches: [main]
-  workflow_dispatch:
+  workflow_run:
+    workflows: ['CI'] # Имя workflow CI (должно совпадать с именем в ci.yml)
+    branches: [main] # Только для main
+    types:
+      - completed # Запускаем после завершения CI
 
-# Разрешаем запись в Pages и чтение содержимого
+# Разрешения для деплоя
 permissions:
   contents: read
   pages: write
@@ -17,48 +19,47 @@ concurrency:
   cancel-in-progress: true
 
 jobs:
-  build:
+  deploy:
+    # Запускаем только если CI завершился успешно
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Устанавливаем pnpm — версия автоматически читается из package.json
+      # Устанавливаем pnpm — версия читается из package.json (packageManager)
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        # version не указываем — экшен читает поле "packageManager" из package.json
+        # version не указываем — автоматически берётся из package.json
 
-      # 2. Настраиваем Node.js и кэш для pnpm
+      # Настраиваем Node.js 22+ (совместим с pnpm 11)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: 'pnpm'
 
-      # 3. Устанавливаем зависимости
       - name: Install dependencies
         run: pnpm install --frozen-lockfile
 
-      # 4. Сборка статического сайта
+      # Сборка статики (используем GITHUB_TOKEN для API)
       - name: Build
         run: pnpm build
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           NEXT_PUBLIC_BASE_PATH: ${{ vars.BASE_PATH || '' }}
 
-      # 5. Загружаем артефакт для GitHub Pages
+      # Загружаем артефакт для GitHub Pages
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./out
 
-  deploy:
-    needs: build
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    steps:
+      # Деплоим на GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
