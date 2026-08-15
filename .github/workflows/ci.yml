@@ -13,17 +13,16 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      # 1. Сначала устанавливаем pnpm
+      # 1. Устанавливаем pnpm — версия автоматически читается из package.json
       - name: Install pnpm
         uses: pnpm/action-setup@v4
-        with:
-          version: 9 # Используйте 9, если локально у вас pnpm v9+
+        # version не указываем!
 
-      # 2. Только теперь настраиваем Node.js и кэш для pnpm
+      # 2. Настраиваем Node.js и кэш для pnpm
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 22
           cache: 'pnpm'
 
       - name: Install dependencies
@@ -35,11 +34,10 @@ jobs:
       - name: Run Type Check
         run: pnpm type-check
 
-      # Чтобы CI не падал, убедитесь, что скрипт test:ci добавлен в package.json
       - name: Run Tests
         run: pnpm test:ci
 
       - name: Run Build
         run: pnpm build
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Токен доступен только в момент сборки на сервере
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
