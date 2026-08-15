@@ -10,8 +10,8 @@ export default async function ProjectsPage() {
         <h1 className="text-4xl font-bold text-white mb-2">Все проекты</h1>
         <p className="text-gray-400 mb-12">Закреплённые репозитории на GitHub</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {repos.map((repo) => (
-            <ProjectCard key={repo.name} repo={repo} />
+          {repos.map((repo, index) => (
+            <ProjectCard key={repo.name} repo={repo} index={index} />
           ))}
         </div>
       </div>

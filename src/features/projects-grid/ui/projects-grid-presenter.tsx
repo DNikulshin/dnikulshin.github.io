@@ -1,3 +1,5 @@
+'use client';
+
 import { ProjectCard } from './project-card';
 import { PROJECTS_TITLE, PROJECTS_SUBTITLE } from '../lib/_constants';
 import type { Repository } from '@/services/github/_types';
@@ -24,8 +26,8 @@ export function ProjectsGridPresenter({ repos, limit = 6 }: ProjectsGridPresente
         <h2 className="text-4xl font-bold text-center text-white mb-4">{PROJECTS_TITLE}</h2>
         <p className="text-center text-gray-400 mb-12">{PROJECTS_SUBTITLE}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedRepos.map((repo) => (
-            <ProjectCard key={repo.name} repo={repo} />
+          {displayedRepos.map((repo, index) => (
+            <ProjectCard key={repo.name} repo={repo} index={index} />
           ))}
         </div>
       </div>
