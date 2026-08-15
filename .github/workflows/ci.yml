@@ -10,18 +10,36 @@ jobs:
   lint-and-test:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      # 1. Сначала устанавливаем pnpm
+      - name: Install pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 9 # Используйте 9, если локально у вас pnpm v9+
+
+      # 2. Только теперь настраиваем Node.js и кэш для pnpm
+      - name: Setup Node
+        uses: actions/setup-node@v4
         with:
           node-version: 20
           cache: 'pnpm'
-      - uses: pnpm/action-setup@v3
-        with:
-          version: 8
-      - run: pnpm install --frozen-lockfile
-      - run: pnpm lint
-      - run: pnpm type-check
-      - run: pnpm test:ci
-      - run: pnpm build
-    env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # <-- здесь используется встроенный токен
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Run Lint
+        run: pnpm lint
+
+      - name: Run Type Check
+        run: pnpm type-check
+
+      # Чтобы CI не падал, убедитесь, что скрипт test:ci добавлен в package.json
+      - name: Run Tests
+        run: pnpm test:ci
+
+      - name: Run Build
+        run: pnpm build
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }} # Токен доступен только в момент сборки на сервере
