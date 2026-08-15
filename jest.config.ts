@@ -1,5 +1,5 @@
 import type { Config } from 'jest';
-import nextJest from 'next/jest';
+import nextJest from 'next/jest.js';
 
 const createJestConfig = nextJest({
   dir: './',
@@ -20,7 +20,12 @@ const customJestConfig: Config = {
     '!src/shared/ui/**',
   ],
   coverageThreshold: {
-    global: { statements: 70, branches: 70, functions: 70, lines: 70 },
+    global: {
+      statements: 70,
+      branches: 70,
+      functions: 70,
+      lines: 70,
+    },
   },
 };
 
