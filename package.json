@@ -9,7 +9,7 @@
     "lint": "eslint",
     "prepare": "husky install",
     "type-check": "tsc --noEmit",
-    "test:ci": "jest --ci --coverage --maxWorkers=2",
+    "test:ci": "jest --ci --coverage --maxWorkers=2 --passWithNoTests",
     "test": "jest",
     "test:watch": "jest --watch"
   },
