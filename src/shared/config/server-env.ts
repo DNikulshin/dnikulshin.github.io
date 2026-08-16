@@ -1,7 +1,7 @@
 import { z } from 'zod';
 
-// Защита от импорта на клиенте
-if (typeof window !== 'undefined') {
+// Защита от импорта на клиенте, но пропускаем в тестах
+if (typeof window !== 'undefined' && process.env.NODE_ENV !== 'test') {
   throw new Error('❌ server-env.ts cannot be imported on the client');
 }
 
