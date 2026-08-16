@@ -1,4 +1,4 @@
-import { fetchPinnedRepos } from '@/services/github/client';
+import { fetchPinnedRepos } from '@/services/github/server';
 import { ProjectCard } from '@/features/projects-grid/ui/project-card';
 
 export default async function ProjectsPage() {

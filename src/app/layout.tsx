@@ -1,3 +1,4 @@
+import { GlobalErrorBoundary } from '@/shared/ui/global-error-boundary';
 import type { Metadata } from 'next';
 import { Inter } from 'next/font/google';
 import { Providers } from './providers';
@@ -17,8 +18,10 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru">
       <body className={inter.className}>
         <Providers>
-          <Header />
-          <main className="pt-16">{children}</main>
+          <GlobalErrorBoundary>
+            <Header />
+            <main className="pt-16">{children}</main>
+          </GlobalErrorBoundary>
         </Providers>
       </body>
     </html>

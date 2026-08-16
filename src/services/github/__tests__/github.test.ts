@@ -1,4 +1,4 @@
-import { fetchPinnedRepos } from '../client';
+import { fetchPinnedRepos } from '../server';
 import { RepositorySchema } from '../_types';
 
 global.fetch = jest.fn();

@@ -1,8 +1,6 @@
-'use client';
-
 import { ProjectCard } from './project-card';
 import { PROJECTS_TITLE, PROJECTS_SUBTITLE } from '../lib/_constants';
-import type { Repository } from '@/services/github/_types';
+import type { Repository } from '@/services/github';
 
 interface ProjectsGridPresenterProps {
   repos: Repository[];

@@ -1,2 +1,2 @@
-export { fetchPinnedRepos } from './client';
+export { fetchPinnedRepos } from './server';
 export type { Repository } from './_types';

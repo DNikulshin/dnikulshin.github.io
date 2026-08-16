@@ -1,4 +1,4 @@
-'use client'; // теперь компонент клиентский, чтобы анимация работала
+'use client';
 
 import { motion } from 'framer-motion';
 import { Card, CardContent, CardHeader, CardTitle } from '@/shared/ui/kit/card';
@@ -9,7 +9,7 @@ import type { Repository } from '@/services/github/_types';
 
 interface ProjectCardProps {
   repo: Repository;
-  index: number; // для задержки
+  index: number;
 }
 
 export function ProjectCard({ repo, index }: ProjectCardProps) {
@@ -20,7 +20,7 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="group hover:shadow-2xl transition-all duration-300 border border-white/10 bg-white/5 backdrop-blur-sm hover:border-blue-500/50 hover:-translate-y-1 h-full">
+      <Card className="group h-full hover:shadow-2xl transition-all duration-300 border border-white/10 bg-white/5 backdrop-blur-sm hover:border-blue-500/50 hover:-translate-y-1">
         <CardHeader>
           <CardTitle className="flex items-start justify-between text-lg">
             <span className="font-bold text-white group-hover:text-blue-400 transition-colors">

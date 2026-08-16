@@ -1,0 +1,13 @@
+{
+  /* --- Настройки сохранения и автосохранения --- */
+  "files.autoSave": "afterDelay",
+  "files.autoSaveDelay": 1000,
+
+  /* --- Настройки форматирования кода --- */
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.formatOnSave": true,
+  "editor.formatOnPaste": true,
+
+  /* --- Дополнительно: Активация темы иконок --- */
+  "workbench.iconTheme": "vscode-icons"
+}

@@ -8,6 +8,12 @@ import { SiGithub } from 'react-icons/si';
 export function Header() {
   const pathname = usePathname();
 
+  const isActive = (path: string) => {
+    const normalizedPathname = pathname.replace(/\/$/, '');
+    const normalizedHref = path.replace(/\/$/, '');
+    return normalizedPathname === normalizedHref;
+  };
+
   return (
     <header className="fixed top-0 left-0 right-0 z-50 bg-slate-950/80 backdrop-blur-md border-b border-white/10">
       <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
@@ -21,7 +27,7 @@ export function Header() {
               href={href}
               className={cn(
                 'text-sm font-medium transition-colors hover:text-white',
-                pathname === href ? 'text-white' : 'text-gray-400'
+                isActive(href) ? 'text-white' : 'text-gray-400'
               )}
             >
               {label}
