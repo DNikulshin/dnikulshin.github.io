@@ -20,7 +20,7 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
       viewport={{ once: true, amount: 0.2 }}
       transition={{ duration: 0.5, delay: index * 0.1 }}
     >
-      <Card className="group h-full hover:shadow-2xl transition-all duration-300 border border-white/10 bg-white/5 backdrop-blur-sm hover:border-blue-500/50 hover:-translate-y-1">
+      <Card className="group h-full bg-slate-800/40 border-slate-700/50 hover:border-indigo-400/60 hover:shadow-2xl hover:shadow-indigo-500/10 transition-all duration-300">
         <CardHeader>
           <CardTitle className="flex items-start justify-between text-lg">
             <span className="font-bold text-white group-hover:text-blue-400 transition-colors">

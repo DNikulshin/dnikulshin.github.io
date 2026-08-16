@@ -4,6 +4,7 @@ import { Inter } from 'next/font/google';
 import { Providers } from './providers';
 import '@/styles/globals.css';
 import { Header } from '@/features/header';
+import { Footer } from '@/features/footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
@@ -15,12 +16,13 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru">
+    <html lang="ru" className="scroll-smooth" data-scroll-behavior="smooth">
       <body className={inter.className}>
         <Providers>
           <GlobalErrorBoundary>
             <Header />
             <main className="pt-16">{children}</main>
+            <Footer />
           </GlobalErrorBoundary>
         </Providers>
       </body>
