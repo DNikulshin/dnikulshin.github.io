@@ -1,0 +1,24 @@
+image: node:22-alpine # используем Node.js 22 (совместим с вашим pnpm)
+
+cache:
+  paths:
+    - node_modules/
+    - .next/cache/
+
+stages:
+  - deploy
+
+pages: # специальное имя для публикации на GitLab Pages
+  stage: deploy
+  script:
+    - corepack enable # включаем pnpm
+    - corepack prepare pnpm@latest --activate
+    - pnpm install --frozen-lockfile
+    - pnpm build # собираем статику (next build + export)
+    - rm -rf public # удаляем старую папку public, если есть
+    - mv out public # перемещаем собранную статику в папку public
+  artifacts:
+    paths:
+      - public # GitLab Pages использует папку public
+  only:
+    - main # публикуем только при пуше в main
