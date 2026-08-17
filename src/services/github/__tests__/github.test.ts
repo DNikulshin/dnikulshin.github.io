@@ -1,5 +1,6 @@
 import { fetchPinnedRepos } from '../server';
 import { RepositorySchema } from '../_types';
+import { FALLBACK_PROJECTS } from '../fallback-projects';
 
 global.fetch = jest.fn();
 
@@ -17,7 +18,9 @@ const mockRepos = [
 ];
 
 describe('GitHub Service', () => {
-  afterEach(() => jest.clearAllMocks());
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
 
   it('fetches pinned repos and validates schema', async () => {
     (fetch as jest.Mock).mockResolvedValue({
@@ -33,8 +36,23 @@ describe('GitHub Service', () => {
     expect(() => RepositorySchema.parse(repos[0])).not.toThrow();
   });
 
-  it('throws on API error', async () => {
-    (fetch as jest.Mock).mockResolvedValue({ ok: false, status: 403 });
-    await expect(fetchPinnedRepos()).rejects.toThrow('GitHub API error: 403');
+  it('returns fallback data on API error', async () => {
+    // Мокаем fetch, чтобы он всегда возвращал ошибку
+    (fetch as jest.Mock).mockResolvedValue({ ok: false, status: 503 });
+
+    const repos = await fetchPinnedRepos();
+    expect(repos).toEqual(FALLBACK_PROJECTS);
+  });
+
+  it('returns fallback data when API returns empty list', async () => {
+    (fetch as jest.Mock).mockResolvedValue({
+      ok: true,
+      json: async () => ({
+        data: { user: { pinnedItems: { nodes: [] } } },
+      }),
+    });
+
+    const repos = await fetchPinnedRepos();
+    expect(repos).toEqual(FALLBACK_PROJECTS);
   });
 });
