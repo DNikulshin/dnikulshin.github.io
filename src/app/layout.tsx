@@ -6,6 +6,7 @@ import { Header } from '@/features/header';
 import { Footer } from '@/features/footer';
 import { GlobalErrorBoundary } from '@/shared/ui/global-error-boundary';
 import '@/styles/globals.css';
+import { ScrollToTop } from '@/features/scroll-to-top';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -113,6 +114,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
 
             <main className="pt-16">{children}</main>
             <Footer />
+            <ScrollToTop />
           </GlobalErrorBoundary>
         </Providers>
       </body>
