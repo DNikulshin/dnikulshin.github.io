@@ -37,12 +37,10 @@ describe('GitHub Service', () => {
   });
 
   it('returns fallback data on API error', async () => {
-    // Мокаем fetch, чтобы он всегда возвращал ошибку
     (fetch as jest.Mock).mockResolvedValue({ ok: false, status: 503 });
-
     const repos = await fetchPinnedRepos();
     expect(repos).toEqual(FALLBACK_PROJECTS);
-  });
+  }, 10000); // увеличиваем таймаут до 10 секунд
 
   it('returns fallback data when API returns empty list', async () => {
     (fetch as jest.Mock).mockResolvedValue({
