@@ -7,7 +7,7 @@ import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../lib/_constants';
 import { cn } from '@/shared/lib/css';
 import { SiGithub } from 'react-icons/si';
-import { handleContactClick } from '@/shared/lib/scroll';
+import { handleAnchorClick } from '@/shared/lib/scroll';
 import { AnimatePresence, motion } from 'framer-motion';
 
 export function Header() {
@@ -36,7 +36,7 @@ export function Header() {
                   key={href}
                   href={href}
                   onClick={(e) => {
-                    handleContactClick(e);
+                    handleAnchorClick(e, href, pathname);
                     closeMenu();
                   }}
                   className={cn(
@@ -106,7 +106,7 @@ export function Header() {
                         key={href}
                         href={href}
                         onClick={(e) => {
-                          handleContactClick(e);
+                          handleAnchorClick(e, href, pathname);
                           closeMenu();
                         }}
                         className={cn(
