@@ -7,7 +7,8 @@ import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../lib/_constants';
 import { cn } from '@/shared/lib/css';
 import { SiGithub } from 'react-icons/si';
-import { handleAnchorClick } from '@/shared/lib/scroll';
+import { handleContactClick } from '@/shared/lib/scroll';
+import { AnimatePresence, motion } from 'framer-motion';
 
 export function Header() {
   const pathname = usePathname();
@@ -35,7 +36,7 @@ export function Header() {
                   key={href}
                   href={href}
                   onClick={(e) => {
-                    handleAnchorClick(e, href);
+                    handleContactClick(e);
                     closeMenu();
                   }}
                   className={cn(
@@ -83,59 +84,69 @@ export function Header() {
         </button>
       </div>
 
-      {/* Мобильное меню */}
-      {isOpen && (
-        <div className="md:hidden bg-indigo-950/95 backdrop-blur-xl border-b border-indigo-400/20 px-4 py-6">
-          <nav className="flex flex-col gap-4">
-            {NAV_LINKS.map(({ href, label }) => {
-              const isAnchor = href.startsWith('#');
-              const isActive = isAnchor ? false : pathname === href;
+      {/* Мобильное меню с анимацией */}
+      <AnimatePresence>
+        {isOpen && (
+          <motion.div
+            initial={{ opacity: 0, height: 0 }}
+            animate={{ opacity: 1, height: 'auto' }}
+            exit={{ opacity: 0, height: 0 }}
+            transition={{ duration: 0.3, ease: 'easeInOut' }}
+            className="md:hidden bg-indigo-950/95 backdrop-blur-xl border-b border-indigo-400/20 overflow-hidden"
+          >
+            <div className="px-4 py-6">
+              <nav className="flex flex-col gap-4">
+                {NAV_LINKS.map(({ href, label }) => {
+                  const isAnchor = href.startsWith('#');
+                  const isActive = isAnchor ? false : pathname === href;
 
-              if (isAnchor) {
-                return (
-                  <a
-                    key={href}
-                    href={href}
-                    onClick={(e) => {
-                      handleAnchorClick(e, href);
-                      closeMenu();
-                    }}
-                    className={cn(
-                      'text-lg font-medium transition-colors hover:text-white',
-                      isActive ? 'text-white' : 'text-indigo-200/80'
-                    )}
-                  >
-                    {label}
-                  </a>
-                );
-              }
+                  if (isAnchor) {
+                    return (
+                      <a
+                        key={href}
+                        href={href}
+                        onClick={(e) => {
+                          handleContactClick(e);
+                          closeMenu();
+                        }}
+                        className={cn(
+                          'text-lg font-medium transition-colors hover:text-white',
+                          isActive ? 'text-white' : 'text-indigo-200/80'
+                        )}
+                      >
+                        {label}
+                      </a>
+                    );
+                  }
 
-              return (
-                <Link
-                  key={href}
-                  href={href}
+                  return (
+                    <Link
+                      key={href}
+                      href={href}
+                      onClick={closeMenu}
+                      className={cn(
+                        'text-lg font-medium transition-colors hover:text-white',
+                        isActive ? 'text-white' : 'text-indigo-200/80'
+                      )}
+                    >
+                      {label}
+                    </Link>
+                  );
+                })}
+                <a
+                  href="https://github.com/DNikulshin"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="text-lg text-indigo-200/80 hover:text-white transition-colors flex items-center gap-2"
                   onClick={closeMenu}
-                  className={cn(
-                    'text-lg font-medium transition-colors hover:text-white',
-                    isActive ? 'text-white' : 'text-indigo-200/80'
-                  )}
                 >
-                  {label}
-                </Link>
-              );
-            })}
-            <a
-              href="https://github.com/DNikulshin"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-lg text-indigo-200/80 hover:text-white transition-colors flex items-center gap-2"
-              onClick={closeMenu}
-            >
-              <SiGithub size={20} /> GitHub
-            </a>
-          </nav>
-        </div>
-      )}
+                  <SiGithub size={20} /> GitHub
+                </a>
+              </nav>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </header>
   );
 }
