@@ -6,12 +6,14 @@ import { SiGithub } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import { useHeroAnimation } from '../model/_use-hero-animation';
 import { HERO_TITLE, HERO_SUBTITLE_LINE_1, HERO_SUBTITLE_LINE_2 } from '../lib/_constants';
+import { ParticlesBackground } from './particles-background';
 
 export function Hero() {
   const { titleRef, subtitleRef } = useHeroAnimation();
 
   return (
     <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white px-4 overflow-hidden pt-16">
+      <ParticlesBackground />
       {/* Декоративное свечение */}
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
 
