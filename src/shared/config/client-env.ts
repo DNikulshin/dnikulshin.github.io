@@ -2,9 +2,10 @@ import { z } from 'zod';
 
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_BASE_PATH: z.string().optional().default(''),
-  // Можно добавить другие NEXT_PUBLIC_* переменные
+  NEXT_PUBLIC_FORMSPREE_ENDPOINT: z.string().min(1, 'NEXT_PUBLIC_FORMSPREE_ENDPOINT is required'),
 });
 
 export const clientEnv = clientEnvSchema.parse({
   NEXT_PUBLIC_BASE_PATH: process.env.NEXT_PUBLIC_BASE_PATH,
+  NEXT_PUBLIC_FORMSPREE_ENDPOINT: process.env.NEXT_PUBLIC_FORMSPREE_ENDPOINT,
 });

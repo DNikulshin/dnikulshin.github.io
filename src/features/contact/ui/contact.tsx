@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { SiTelegram, SiGithub } from 'react-icons/si';
 import { Mail } from 'lucide-react';
 import { CONTACT_LINKS } from '../lib/_constants';
+import { ContactForm } from './contact-form';
 
 const iconMap = {
   Telegram: SiTelegram,
@@ -15,7 +16,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-indigo-500/10"
+      className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-indigo-500/10 scroll-mt-16"
     >
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
@@ -27,7 +28,9 @@ export function Contact() {
           Свяжитесь со мной
         </motion.h2>
         <p className="text-gray-400 mb-12">Готов обсудить ваш проект или ответить на вопросы</p>
-        <div className="flex flex-wrap justify-center gap-6">
+
+        {/* Социальные ссылки */}
+        <div className="flex flex-wrap justify-center gap-6 mb-12">
           {CONTACT_LINKS.map((link, idx) => {
             const Icon = iconMap[link.icon as keyof typeof iconMap];
             return (
@@ -42,11 +45,17 @@ export function Contact() {
                 transition={{ delay: idx * 0.1 }}
                 className="flex items-center gap-3 px-6 py-3 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-indigo-400/60 hover:bg-slate-800/60 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
               >
-                <Icon size={20} className="text-blue-400" />
+                <Icon size={20} className="text-indigo-400" />
                 <span className="text-white font-medium">{link.label}</span>
               </motion.a>
             );
           })}
+        </div>
+
+        {/* Форма */}
+        <div className="border-t border-white/5 pt-12">
+          <h3 className="text-2xl font-semibold text-white mb-6">Или напишите мне</h3>
+          <ContactForm />
         </div>
       </div>
     </section>
