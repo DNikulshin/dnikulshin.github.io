@@ -1,13 +1,13 @@
+import type { AppRouterInstance } from 'next/dist/shared/lib/app-router-context.shared-runtime';
+
 export function scrollToElement(elementId: string) {
   const element = document.getElementById(elementId);
   if (element) {
-    // Первая попытка: нативный scrollIntoView с block: 'center'
     element.scrollIntoView({
       behavior: 'smooth',
       block: 'center',
     });
 
-    // Вторая попытка (гарантия): через 100 мс корректируем позицию вручную
     setTimeout(() => {
       const headerHeight = 64;
       const rect = element.getBoundingClientRect();
@@ -26,20 +26,22 @@ export function scrollToElement(elementId: string) {
 
 /**
  * Универсальный обработчик для якорных ссылок.
- * Использует MutationObserver для ожидания появления элемента,
- * если он ещё не отрендерился.
+ * @param e - событие клика
+ * @param href - ссылка (например, '#contact', '#about')
+ * @param currentPath - текущий путь (например, '/projects')
+ * @param router - экземпляр роутера Next.js (обязателен для навигации)
  */
 export function handleAnchorClick(
   e: React.MouseEvent<HTMLAnchorElement>,
   href: string,
-  currentPath: string = '/'
+  currentPath: string,
+  router: AppRouterInstance // теперь обязательный
 ) {
   e.preventDefault();
 
   const targetId = href.replace('#', '');
 
   if (currentPath === '/') {
-    // Проверяем, существует ли элемент уже сейчас
     const element = document.getElementById(targetId);
     if (element) {
       scrollToElement(targetId);
@@ -47,7 +49,6 @@ export function handleAnchorClick(
       return;
     }
 
-    // Если элемента нет — ждём его появления через MutationObserver
     const observer = new MutationObserver(() => {
       const el = document.getElementById(targetId);
       if (el) {
@@ -62,12 +63,11 @@ export function handleAnchorClick(
       subtree: true,
     });
 
-    // Предохранитель: отключаем наблюдатель через 10 секунд
     setTimeout(() => {
       observer.disconnect();
     }, 10000);
   } else {
-    // На других страницах перенаправляем на главную с якорем
-    window.location.href = `/${href}`;
+    // Используем роутер Next.js для навигации без перезагрузки
+    router.push(`/${href}`);
   }
 }

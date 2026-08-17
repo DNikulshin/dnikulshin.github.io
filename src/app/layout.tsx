@@ -101,11 +101,13 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         />
         <noscript>
           <div>
-            <img
-              src="https://mc.yandex.ru/watch/111668865"
-              style={{ position: 'absolute', left: '-9999px' }}
-              alt=""
-            />
+            <picture>
+              <img
+                src="https://mc.yandex.ru/watch/111668865"
+                style={{ position: 'absolute', left: '-9999px' }}
+                alt=""
+              />
+            </picture>
           </div>
         </noscript>
       </head>

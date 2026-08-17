@@ -52,9 +52,8 @@ export function Contact() {
           })}
         </div>
 
-        {/* Форма */}
-        <div className="border-t border-white/5 pt-12">
-          <h3 className="text-2xl font-semibold text-white mb-6">Или напишите мне</h3>
+        <div className="mt-12">
+          <h3 className="text-xl font-semibold text-white mb-4">Или напишите через форму</h3>
           <ContactForm />
         </div>
       </div>

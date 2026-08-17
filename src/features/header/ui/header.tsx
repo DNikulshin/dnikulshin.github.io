@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 import { Menu, X } from 'lucide-react';
 import { NAV_LINKS } from '../lib/_constants';
 import { cn } from '@/shared/lib/css';
@@ -12,6 +12,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 
 export function Header() {
   const pathname = usePathname();
+  const router = useRouter(); // <-- получаем роутер
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => setIsOpen(!isOpen);
@@ -24,7 +25,6 @@ export function Header() {
           DNikulshin
         </Link>
 
-        {/* Десктопная навигация */}
         <nav className="hidden md:flex items-center gap-6">
           {NAV_LINKS.map(({ href, label }) => {
             const isAnchor = href.startsWith('#');
@@ -36,7 +36,7 @@ export function Header() {
                   key={href}
                   href={href}
                   onClick={(e) => {
-                    handleAnchorClick(e, href, pathname);
+                    handleAnchorClick(e, href, pathname, router);
                     closeMenu();
                   }}
                   className={cn(
@@ -74,7 +74,6 @@ export function Header() {
           </a>
         </nav>
 
-        {/* Кнопка бургера (мобильная) */}
         <button
           onClick={toggleMenu}
           className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
@@ -84,7 +83,6 @@ export function Header() {
         </button>
       </div>
 
-      {/* Мобильное меню с анимацией */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -106,7 +104,7 @@ export function Header() {
                         key={href}
                         href={href}
                         onClick={(e) => {
-                          handleAnchorClick(e, href, pathname);
+                          handleAnchorClick(e, href, pathname, router);
                           closeMenu();
                         }}
                         className={cn(

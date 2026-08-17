@@ -2,7 +2,7 @@ import { z } from 'zod';
 
 const clientEnvSchema = z.object({
   NEXT_PUBLIC_BASE_PATH: z.string().optional().default(''),
-  NEXT_PUBLIC_FORMSPREE_ENDPOINT: z.string().min(1, 'NEXT_PUBLIC_FORMSPREE_ENDPOINT is required'),
+  NEXT_PUBLIC_FORMSPREE_ENDPOINT: z.string().optional(), // <-- опционально
 });
 
 export const clientEnv = clientEnvSchema.parse({
