@@ -1,5 +1,6 @@
-export const HERO_TITLE = 'Наймите одного разработчика вместо трех';
+export const HERO_TITLE = 'Разрабатываю fullstack-приложения и интегрирую AI-решения';
 
-export const HERO_SUBTITLE_LINE_1 = 'Fullstack (TypeScript/Python) + AI-интеграции (LLM/RAG)';
+export const HERO_SUBTITLE_LINE_1 = 'Автономный TypeScript/Python разработчик.';
 
-export const HERO_SUBTITLE_LINE_2 = '10+ проектов в продакшене. 8 лет строю надежные системы.';
+export const HERO_SUBTITLE_LINE_2 =
+  'От интерактивного фронтенда до продакшен-инфраструктуры и LLM/RAG систем.';
