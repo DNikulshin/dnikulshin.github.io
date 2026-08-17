@@ -7,6 +7,7 @@ import { Footer } from '@/features/footer';
 import { GlobalErrorBoundary } from '@/shared/ui/global-error-boundary';
 import '@/styles/globals.css';
 import { ScrollToTop } from '@/features/scroll-to-top';
+import { JsonLd } from '@/features/json-ld';
 
 const inter = Inter({ subsets: ['latin', 'cyrillic'] });
 
@@ -68,6 +69,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
   return (
     <html lang="ru" className="scroll-smooth" data-scroll-behavior="smooth">
       <head>
+        <JsonLd />
         {/* Яндекс.Метрика */}
         <Script
           id="yandex-metrika"
