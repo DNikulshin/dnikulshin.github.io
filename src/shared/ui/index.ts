@@ -6,3 +6,4 @@ export { Avatar, AvatarImage, AvatarFallback } from './kit/avatar';
 export { Separator } from './kit/separator';
 export { Loader } from './loader';
 export { ProjectsErrorFallback } from './error-fallback';
+export { SectionDivider } from './section-divider';

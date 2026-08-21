@@ -67,7 +67,7 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className="scroll-smooth" data-scroll-behavior="smooth">
+    <html lang="ru" className="scroll-smooth dark" data-scroll-behavior="smooth">
       <head>
         <JsonLd />
         {/* Яндекс.Метрика */}
