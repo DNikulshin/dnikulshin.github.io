@@ -47,6 +47,7 @@ export function Hero() {
 
           <Button
             variant="outline"
+
             className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
             render={
               <a
@@ -54,6 +55,7 @@ export function Hero() {
                 target="_blank"
                 rel="noopener noreferrer"
                 className="text-inherit flex items-center"
+                aria-label="GitHub"
               />
             }
           >

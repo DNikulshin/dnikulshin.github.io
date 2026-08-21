@@ -63,8 +63,9 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
               target="_blank"
               rel="noopener noreferrer"
               className="flex items-center gap-1 text-blue-400 hover:text-blue-300 transition-colors"
+              aria-label={`Репозиторий ${repo.name}`}
             >
-              <SiGithub size={14} /> Репозиторий
+              <SiGithub size={14} aria-hidden="true" /> Репозиторий
             </a>
           </div>
         </CardContent>
