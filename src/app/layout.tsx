@@ -70,10 +70,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru" className="scroll-smooth dark" data-scroll-behavior="smooth">
       <head>
         <JsonLd />
-        {/* Яндекс.Метрика */}
+        {/* Оптимизированное подключение Яндекс.Метрики */}
+        <link rel="preconnect" href="https://mc.yandex.ru" />
         <Script
           id="yandex-metrika"
-          strategy="afterInteractive"
+          strategy="lazyOnload"
           dangerouslySetInnerHTML={{
             __html: `
               (function(m,e,t,r,i,k,a){
@@ -87,15 +88,28 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               })
               (window, document, 'script', 'https://mc.yandex.ru/metrika/tag.js?id=111668865', 'ym');
 
-              ym(111668865, 'init', {
-                ssr: true,
-                clickmap: true,
-                ecommerce: 'dataLayer',
-                referrer: document.referrer,
-                url: location.href,
-                accurateTrackBounce: true,
-                trackLinks: true
-              });
+              // Откладываем инициализацию до момента, пока браузер не освободится
+              const initMetrika = () => {
+                if (typeof ym === 'function') {
+                  ym(111668865, 'init', {
+                    ssr: true,
+                    clickmap: true, // false  Для перформанса
+                    ecommerce: 'dataLayer',
+                    referrer: document.referrer,
+                    url: location.href,
+                    accurateTrackBounce: true,
+                    trackLinks: true
+                  });
+                }
+              };
+
+              if (typeof window !== 'undefined') {
+                if ('requestIdleCallback' in window) {
+                  window.requestIdleCallback(initMetrika, { timeout: 2000 });
+                } else {
+                  setTimeout(initMetrika, 2000);
+                }
+              }
             `,
           }}
         />
@@ -115,7 +129,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <Providers>
           <GlobalErrorBoundary>
             <Header />
-
             <main className="pt-16">{children}</main>
             <Footer />
             <ScrollToTop />

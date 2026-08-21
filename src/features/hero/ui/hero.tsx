@@ -1,4 +1,5 @@
 'use client';
+import dynamic from 'next/dynamic';
 import { scrollToElement } from '@/shared/lib/scroll';
 import { Button } from '@/shared/ui/kit/button';
 import { ArrowRight, Send } from 'lucide-react';
@@ -6,7 +7,12 @@ import { SiGithub } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import { useHeroAnimation } from '../model/_use-hero-animation';
 import { HERO_TITLE, HERO_SUBTITLE_LINE_1, HERO_SUBTITLE_LINE_2 } from '../lib/_constants';
-import { ParticlesBackground } from './particles-background';
+
+// Динамическая загрузка частиц (не нужны при SSR)
+const ParticlesBackground = dynamic(
+  () => import('./particles-background').then((mod) => mod.ParticlesBackground),
+  { ssr: false }
+);
 
 export function Hero() {
   const { titleRef, subtitleRef } = useHeroAnimation();
