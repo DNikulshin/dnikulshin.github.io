@@ -12,13 +12,14 @@ export function Hero() {
   const { titleRef, subtitleRef } = useHeroAnimation();
 
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-gradient-to-br from-indigo-950 via-slate-900 to-slate-950 text-white px-4 overflow-hidden pt-16">
-      <ParticlesBackground />
+    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-linear-to-br from-indigo-950 via-slate-900 to-slate-950 text-white px-4 overflow-hidden pt-16">
       {/* Декоративное свечение */}
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
+      <ParticlesBackground />
+
+      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h1 ref={titleRef} className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
+        <h1 ref={titleRef} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
           {HERO_TITLE}
         </h1>
         <br />
@@ -28,13 +29,18 @@ export function Hero() {
           {HERO_SUBTITLE_LINE_2}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <Button size="default" variant="default" render={<a href="/projects" />}>
+          <Button
+            className="hover:bg-white/10 hover:text-white"
+            size="default"
+            variant="default"
+            render={<a href="/projects" />}
+          >
             Проекты <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
           <Button
             size="default"
             variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10"
+            className="border-white/20 text-white bg-transparent  hover:bg-white/10 hover:text-white"
             onClick={() => scrollToElement('contact')}
           >
             Связаться
@@ -42,7 +48,7 @@ export function Hero() {
           <Button
             size="default"
             variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10"
+            className="border-white/20 text-white bg-transparent hover:bg-white/10  hover:text-white"
             render={
               <a
                 href="https://github.com/DNikulshin"
@@ -59,7 +65,7 @@ export function Hero() {
 
       {/* Стрелка вниз */}
       <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
         animate={{ y: [0, 10, 0] }}
         transition={{ repeat: Infinity, duration: 2 }}
       >
