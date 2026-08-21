@@ -29,7 +29,12 @@ export function Hero() {
           {HERO_SUBTITLE_LINE_2}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
-          <Button size="lg" variant="default" onClick={() => scrollToElement('contact')}>
+          <Button
+            className="cursor-pointer"
+            size="lg"
+            variant="default"
+            onClick={() => scrollToElement('contact')}
+          >
             Связаться <Send className="ml-2 h-4 w-4" />
           </Button>
 
