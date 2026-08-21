@@ -18,7 +18,7 @@ export function Hero() {
       <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,_var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
 
       <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h1 ref={titleRef} className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
+        <h1 ref={titleRef} className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
           {HERO_TITLE}
         </h1>
         <br />
