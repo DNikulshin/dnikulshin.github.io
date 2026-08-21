@@ -30,37 +30,35 @@ export function Hero() {
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
           <Button
-            className="cursor-pointer"
-            size="lg"
             variant="default"
             onClick={() => scrollToElement('contact')}
+            className="h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
           >
             Связаться <Send className="ml-2 h-4 w-4" />
           </Button>
 
           <Button
-            size="lg"
             variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
+            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
             render={<a href="/projects" />}
           >
             Проекты <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
 
           <Button
-            size="lg"
             variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
+            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
             render={
               <a
                 href="https://github.com/DNikulshin"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-inherit"
+                className="text-inherit flex items-center"
               />
             }
           >
-            <SiGithub className="mr-2 h-4 w-4" /> GitHub
+            <SiGithub className="h-4 w-4 sm:mr-2" />
+            <span className="hidden sm:inline">GitHub</span>
           </Button>
         </div>
       </div>
