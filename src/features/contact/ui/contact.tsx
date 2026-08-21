@@ -45,7 +45,7 @@ export function Contact() {
                 transition={{ delay: idx * 0.1 }}
                 className="flex items-center gap-3 px-6 py-3 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-indigo-400/60 hover:bg-slate-800/60 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
               >
-                <Icon size={20} className="text-indigo-400" />
+                <Icon size={20} className="text-indigo-400" aria-hidden="true" />
                 <span className="text-white font-medium">{link.label}</span>
               </motion.a>
             );
