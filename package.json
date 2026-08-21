@@ -12,7 +12,8 @@
     "test:ci": "jest --ci --coverage --maxWorkers=2 --passWithNoTests",
     "test": "jest",
     "test:watch": "jest --watch",
-    "clean:dev": "rm -rf .next && rm -rf node_modules/.cache && pnpm install && pnpm dev"
+    "clean:dev": "rm -rf .next && rm -rf node_modules/.cache && pnpm install && pnpm dev",
+    "analyze": "PORT=4000 next experimental-analyze"
   },
   "dependencies": {
     "@base-ui/react": "^1.7.0",
@@ -39,6 +40,7 @@
   "devDependencies": {
     "@commitlint/cli": "^21.2.2",
     "@commitlint/config-conventional": "^21.2.2",
+    "@next/bundle-analyzer": "^16.3.1",
     "@tailwindcss/postcss": "^4",
     "@tanstack/eslint-plugin-query": "^5.101.4",
     "@tanstack/react-query-devtools": "^5.101.4",

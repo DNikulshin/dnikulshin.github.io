@@ -65,7 +65,7 @@ export function Hero() {
               />
             }
           >
-            <SiGithub className="h-4 w-4 sm:mr-2" />
+            <SiGithub className="h-4 w-4 sm:mr-2" aria-hidden="true" />
             <span className="hidden sm:inline">GitHub</span>
           </Button>
         </div>

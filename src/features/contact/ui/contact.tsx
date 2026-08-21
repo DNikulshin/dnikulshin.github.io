@@ -16,7 +16,7 @@ export function Contact() {
   return (
     <section
       id="contact"
-      className="py-24 px-4 bg-gradient-to-b from-slate-900 to-slate-950 border-t border-indigo-500/10 scroll-mt-16"
+      className="py-24 px-4 bg-linear-to-b from-slate-900 to-slate-950 border-t border-indigo-500/10 scroll-mt-16"
     >
       <div className="max-w-4xl mx-auto text-center">
         <motion.h2
