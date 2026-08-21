@@ -1,7 +1,7 @@
 'use client';
 import { scrollToElement } from '@/shared/lib/scroll';
 import { Button } from '@/shared/ui/kit/button';
-import { ArrowRight } from 'lucide-react';
+import { ArrowRight, Send } from 'lucide-react';
 import { SiGithub } from 'react-icons/si';
 import { motion } from 'framer-motion';
 import { useHeroAnimation } from '../model/_use-hero-animation';
@@ -29,26 +29,23 @@ export function Hero() {
           {HERO_SUBTITLE_LINE_2}
         </p>
         <div className="flex flex-wrap gap-3 justify-center">
+          <Button size="lg" variant="default" onClick={() => scrollToElement('contact')}>
+            Связаться <Send className="ml-2 h-4 w-4" />
+          </Button>
+
           <Button
-            className="hover:bg-white/10 hover:text-white"
-            size="default"
-            variant="default"
+            size="lg"
+            variant="outline"
+            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
             render={<a href="/projects" />}
           >
             Проекты <ArrowRight className="ml-2 h-4 w-4" />
           </Button>
+
           <Button
-            size="default"
+            size="lg"
             variant="outline"
-            className="border-white/20 text-white bg-transparent  hover:bg-white/10 hover:text-white"
-            onClick={() => scrollToElement('contact')}
-          >
-            Связаться
-          </Button>
-          <Button
-            size="default"
-            variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10  hover:text-white"
+            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white"
             render={
               <a
                 href="https://github.com/DNikulshin"
