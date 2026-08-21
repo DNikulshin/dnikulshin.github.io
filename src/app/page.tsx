@@ -13,7 +13,9 @@ export default function HomePage() {
       <About />
       <SectionDivider />
       <Skills />
+      <SectionDivider />
       <ProjectsGrid />
+      <SectionDivider />
       <Contact />
     </>
   );
