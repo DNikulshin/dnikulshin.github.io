@@ -1,5 +1,8 @@
+'use client';
+
 import { ProjectCard } from './project-card';
 import { PROJECTS_TITLE, PROJECTS_SUBTITLE } from '../lib/_constants';
+import { useLiveRepoMeta } from '../model/_use-live-repo-meta';
 import type { Repository } from '@/services/github';
 
 interface ProjectsGridPresenterProps {
@@ -9,6 +12,16 @@ interface ProjectsGridPresenterProps {
 
 export function ProjectsGridPresenter({ repos, limit = 6 }: ProjectsGridPresenterProps) {
   const displayedRepos = repos.slice(0, limit);
+
+  const repoNames = displayedRepos.map((r) => r.name);
+  const initialMeta = Object.fromEntries(
+    displayedRepos.map((r) => [
+      r.name,
+      { stargazerCount: r.stargazerCount, updatedAt: r.updatedAt },
+    ])
+  );
+
+  const { data: liveMetaMap } = useLiveRepoMeta(repoNames, initialMeta);
 
   if (!displayedRepos.length) {
     return (
@@ -24,9 +37,18 @@ export function ProjectsGridPresenter({ repos, limit = 6 }: ProjectsGridPresente
         <h2 className="text-4xl font-bold text-center text-white mb-4">{PROJECTS_TITLE}</h2>
         <p className="text-center text-gray-400 mb-12">{PROJECTS_SUBTITLE}</p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {displayedRepos.map((repo, index) => (
-            <ProjectCard key={repo.name} repo={repo} index={index} />
-          ))}
+          {displayedRepos.map((repo, index) => {
+            const live = liveMetaMap?.[repo.name];
+            return (
+              <ProjectCard
+                key={repo.name}
+                repo={repo}
+                index={index}
+                liveStars={live?.stargazerCount}
+                liveUpdatedAt={live?.updatedAt}
+              />
+            );
+          })}
         </div>
       </div>
     </section>

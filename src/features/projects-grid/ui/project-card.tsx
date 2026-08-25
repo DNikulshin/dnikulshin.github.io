@@ -10,9 +10,16 @@ import type { Repository } from '@/services/github/_types';
 interface ProjectCardProps {
   repo: Repository;
   index: number;
+  /** Live star count (overrides build-time value when available) */
+  liveStars?: number;
+  /** Live updatedAt ISO string (overrides build-time value when available) */
+  liveUpdatedAt?: string;
 }
 
-export function ProjectCard({ repo, index }: ProjectCardProps) {
+export function ProjectCard({ repo, index, liveStars, liveUpdatedAt }: ProjectCardProps) {
+  const stars = liveStars ?? repo.stargazerCount;
+  const updatedAt = liveUpdatedAt || repo.updatedAt;
+
   return (
     <motion.div
       initial={{ opacity: 0, y: 30 }}
@@ -26,8 +33,8 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
             <span className="font-bold text-white group-hover:text-blue-400 transition-colors">
               {repo.name}
             </span>
-            <span className="flex items-center gap-1 text-sm text-yellow-400/80">
-              ⭐ {repo.stargazerCount}
+            <span className="flex items-center gap-1 text-sm text-yellow-400/80 tabular-nums">
+              ⭐ {stars}
             </span>
           </CardTitle>
         </CardHeader>
@@ -57,7 +64,7 @@ export function ProjectCard({ repo, index }: ProjectCardProps) {
             ))}
           </div>
           <div className="mt-2 flex items-center justify-between text-xs text-gray-400">
-            <span>Обновлено: {formatDate(repo.updatedAt)}</span>
+            <span>Обновлено: {formatDate(updatedAt)}</span>
             <a
               href={repo.url}
               target="_blank"
