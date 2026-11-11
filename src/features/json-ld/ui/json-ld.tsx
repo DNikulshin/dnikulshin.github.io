@@ -13,6 +13,8 @@ import {
 
 export function JsonLd() {
   const pathname = usePathname();
+  // trailingSlash: true — Next отдаёт '/projects/', поэтому хвостовой слэш отбрасываем
+  const path = pathname.replace(/\/+$/, '') || '/';
 
   const schemas = {
     '@context': 'https://schema.org',
@@ -66,7 +68,7 @@ export function JsonLd() {
             name: 'Главная',
             item: SITE_URL,
           },
-          ...(pathname === '/projects'
+          ...(path === '/projects'
             ? [
                 {
                   '@type': 'ListItem',
@@ -79,7 +81,8 @@ export function JsonLd() {
         ],
       },
       // 4. ItemList (только на главной и /projects)
-      ...(pathname === '/' || pathname === '/projects'
+      // ItemList главной страницы; на /projects список даёт ProjectsJsonLd с данными GitHub
+      ...(path === '/'
         ? [
             {
               '@type': 'ItemList',
