@@ -1,10 +1,19 @@
+import {
+  SITE_EMAIL,
+  SITE_GITHUB,
+  SITE_NAME,
+  SITE_ROLE,
+  SITE_TELEGRAM,
+  SITE_TELEGRAM_HANDLE,
+} from '@/shared/config/site';
+
 export const SITE = {
-  name: 'Дмитрий Никульшин',
-  role: 'fullstack / инфраструктура',
-  telegram: 'https://t.me/nikulshin_dev',
-  telegramHandle: '@nikulshin_dev',
-  email: 'd.nikulshin.dev@gmail.com',
-  github: 'https://github.com/DNikulshin',
+  name: SITE_NAME,
+  role: SITE_ROLE,
+  telegram: SITE_TELEGRAM,
+  telegramHandle: SITE_TELEGRAM_HANDLE,
+  email: SITE_EMAIL,
+  github: SITE_GITHUB,
 } as const;
 
 export const NAV_LINKS = [

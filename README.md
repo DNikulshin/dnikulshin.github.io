@@ -1,9 +1,9 @@
 # Дмитрий Никульшин — портфолио fullstack-разработчика
 
-[![Deploy](https://img.shields.io/github/deployments/DNikulshin/DNikulshin.github.io/github-pages?label=deploy&style=flat-square)](https://dnikulshin.github.io/)
+[![Deploy](https://img.shields.io/github/deployments/DNikulshin/DNikulshin.github.io/github-pages?label=deploy&style=flat-square)](https://dnikulshin.ru/)
 [![CI](https://img.shields.io/github/actions/workflow/status/DNikulshin/DNikulshin.github.io/ci.yml?label=CI&style=flat-square)](https://github.com/DNikulshin/DNikulshin.github.io/actions/workflows/ci.yml)
 
-Живой сайт: **https://dnikulshin.github.io/**
+Живой сайт: **https://dnikulshin.ru/** (кастомный домен GitHub Pages; `dnikulshin.github.io` отдаёт 301 сюда)
 
 Портфолио построено вокруг одного принципа: вместо обещаний — то, что можно открыть и проверить.
 Проекты собраны не в карточки, а в записи с разбором: что делает система, на чём написана,
@@ -62,7 +62,7 @@ src/
 ├── features/            # экраны: hero, system-map, facts, experience,
 │                        # projects-grid, approach, contact, header, footer
 ├── services/github/     # GraphQL-запрос, порядок проектов, fallback-данные
-├── shared/              # UI-кит, утилиты, конфигурация
+├── shared/              # UI-кит, утилиты, конфигурация сайта (домен, контакты)
 └── styles/              # токены палитры и типографики
 ```
 
@@ -76,6 +76,13 @@ src/
   При `prefers-reduced-motion: reduce` движение отключается.
 - Порядок проектов задаётся в `services/github/_order.ts`, а не настройкой закреплённых
   репозиториев: карточка не исчезает из-за галочки в профиле.
+
+## Домен и метаданные
+
+Адрес сайта и контакты заданы в одном файле — `src/shared/config/site.ts`. Оттуда их берут
+`metadataBase`, canonical, Open Graph, JSON-LD, `sitemap.xml` и `robots.txt`, поэтому смена
+домена не требует правок в десятке мест. Карта сайта и robots собираются при билде
+(`src/app/sitemap.ts`, `src/app/robots.ts`), а не лежат статикой в `public/`.
 
 ## Деплой
 

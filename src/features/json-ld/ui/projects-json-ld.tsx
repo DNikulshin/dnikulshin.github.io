@@ -1,4 +1,5 @@
 import { Repository } from '@/services/github/_types';
+import { SITE_GITHUB, SITE_NAME, SITE_URL } from '@/shared/config/site';
 
 interface ProjectsJsonLdProps {
   repos: Repository[];
@@ -20,26 +21,21 @@ export function ProjectsJsonLd({ repos }: ProjectsJsonLdProps) {
       datePublished: repo.updatedAt,
       author: {
         '@type': 'Person',
-        name: 'DNikulshin',
-        url: 'https://dnikulshin.github.io',
+        '@id': `${SITE_URL}/#person`,
+        name: SITE_NAME,
+        url: SITE_URL,
       },
       codeRepository: repo.url,
-      ...(repo.stargazerCount > 0 && {
-        aggregateRating: {
-          '@type': 'AggregateRating',
-          ratingValue: Math.min(5, Math.round(repo.stargazerCount / 10)),
-          ratingCount: repo.stargazerCount,
-        },
-      }),
     },
   }));
 
   const schema = {
     '@context': 'https://schema.org',
     '@type': 'ItemList',
-    name: 'Проекты разработчика DNikulshin',
-    description: 'Мои ключевые проекты с открытым исходным кодом',
-    url: 'https://dnikulshin.github.io/projects',
+    name: `Проекты ${SITE_NAME}`,
+    description: 'Проекты с открытым исходным кодом',
+    url: `${SITE_URL}/projects/`,
+    author: { '@id': `${SITE_URL}/#person`, '@type': 'Person', name: SITE_NAME, url: SITE_GITHUB },
     numberOfItems: repos.length,
     itemListElement,
   };

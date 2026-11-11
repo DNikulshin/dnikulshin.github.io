@@ -7,6 +7,7 @@ import { GlobalErrorBoundary } from '@/shared/ui/global-error-boundary';
 import '@/styles/globals.css';
 import { ScrollToTop } from '@/features/scroll-to-top';
 import { JsonLd } from '@/features/json-ld';
+import { SITE_DESCRIPTION, SITE_NAME, SITE_TITLE, SITE_URL } from '@/shared/config/site';
 
 const golos = Golos_Text({
   subsets: ['latin', 'cyrillic'],
@@ -23,13 +24,15 @@ const unbounded = Unbounded({
 });
 
 export const metadata: Metadata = {
-  metadataBase: new URL('https://dnikulshin.github.io'),
+  metadataBase: new URL(SITE_URL),
   title: {
-    default: 'Дмитрий Никульшин — fullstack-разработчик',
+    default: SITE_TITLE,
     template: '%s | Дмитрий Никульшин',
   },
-  description:
-    'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам. Код открыт, 12 репозиториев с CI.',
+  description: SITE_DESCRIPTION,
+  alternates: {
+    canonical: '/',
+  },
   keywords: [
     'fullstack разработчик',
     'AI интеграция',
@@ -43,11 +46,11 @@ export const metadata: Metadata = {
     'портфолио разработчика',
   ],
   openGraph: {
-    title: 'Дмитрий Никульшин — fullstack-разработчик',
+    title: SITE_TITLE,
     description:
       'TypeScript, Node.js, React, PostgreSQL. Системы, которые работают: телеметрия, документы, доступ к машинам.',
-    url: 'https://dnikulshin.github.io',
-    siteName: 'DNikulshin',
+    url: SITE_URL,
+    siteName: SITE_NAME,
     locale: 'ru_RU',
     type: 'website',
     images: [
@@ -74,6 +77,8 @@ export const metadata: Metadata = {
     icon: '/favicon.ico',
     apple: '/apple-touch-icon.png',
   },
+  authors: [{ name: SITE_NAME, url: SITE_URL }],
+  creator: SITE_NAME,
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

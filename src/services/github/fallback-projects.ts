@@ -4,7 +4,7 @@ export const FALLBACK_PROJECTS: Repository[] = [
   {
     name: 'docbrain',
     description:
-      'AI-консультант по документации с RAG (pgvector), agent с function calling, синхронизация через n8n. Стек: FastAPI, Next.js, PostgreSQL, MinIO, Authelia. Веб-чат + Telegram-бот.',
+      'Поиск по внутренней документации: RAG на pgvector, парсеры PDF, DOCX, Markdown и URL, эмбеддинги через OpenRouter, файлы в MinIO, импорт из Google Drive через n8n.',
     url: 'https://github.com/DNikulshin/docbrain',
     stargazerCount: 5,
     forkCount: 1,
