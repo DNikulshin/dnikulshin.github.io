@@ -1,150 +1,37 @@
-'use client';
-
-import { useState } from 'react';
 import Link from 'next/link';
-import { usePathname, useRouter } from 'next/navigation';
-import { Menu, X } from 'lucide-react';
-import { NAV_LINKS } from '../lib/_constants';
+import { NAV_CTA, NAV_LINKS, SITE } from '../lib/_constants';
 import { cn } from '@/shared/lib/css';
-import { SiGithub } from 'react-icons/si';
-import { handleAnchorClick } from '@/shared/lib/scroll';
-import { AnimatePresence, motion } from 'framer-motion';
 
 export function Header() {
-  const pathname = usePathname();
-  const router = useRouter(); // <-- получаем роутер
-  const [isOpen, setIsOpen] = useState(false);
-
-  const toggleMenu = () => setIsOpen(!isOpen);
-  const closeMenu = () => setIsOpen(false);
-
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 bg-indigo-950/90 backdrop-blur-xl border-b border-indigo-400/20">
-      <div className="max-w-6xl mx-auto px-4 h-16 flex items-center justify-between">
-        <Link href="/" className="text-white font-bold text-xl" onClick={closeMenu}>
-          DNikulshin
+    <header className="border-b border-rule">
+      <div className="wrap flex min-h-16 items-center justify-between gap-6">
+        <Link href="/" className="text-[15px] font-semibold">
+          {SITE.name}
+          <span className="hidden font-normal text-muted sm:inline"> — {SITE.role}</span>
         </Link>
 
-        <nav className="hidden md:flex items-center gap-6">
-          {NAV_LINKS.map(({ href, label }) => {
-            const isAnchor = href.startsWith('#');
-            const isActive = isAnchor ? false : pathname === href;
-
-            if (isAnchor) {
-              return (
-                <a
-                  key={href}
-                  href={href}
-                  onClick={(e) => {
-                    handleAnchorClick(e, href, pathname, router);
-                    closeMenu();
-                  }}
-                  className={cn(
-                    'text-sm font-medium transition-colors hover:text-white cursor-pointer',
-                    isActive ? 'text-white' : 'text-indigo-200/80'
-                  )}
-                >
-                  {label}
-                </a>
-              );
-            }
-
-            return (
-              <Link
-                key={href}
-                href={href}
-                onClick={closeMenu}
-                className={cn(
-                  'text-sm font-medium transition-colors hover:text-white',
-                  isActive ? 'text-white' : 'text-indigo-200/80'
-                )}
-              >
-                {label}
-              </Link>
-            );
-          })}
+        <nav className="flex items-center gap-5" aria-label="Основная навигация">
+          {NAV_LINKS.map(({ href, label, hideOn }) => (
+            <a
+              key={href}
+              href={href}
+              className={cn(
+                'flex min-h-9 items-center border-b border-transparent text-sm hover:border-ink',
+                hideOn === 'md' && 'hidden md:flex'
+              )}
+            >
+              {label}
+            </a>
+          ))}
           <a
-            href="https://github.com/DNikulshin"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="text-indigo-200/80 hover:text-white transition-colors"
-            aria-label="GitHub"
+            href={NAV_CTA.href}
+            className="flex min-h-9 items-center text-sm font-medium text-signal hover:underline hover:underline-offset-4"
           >
-            <SiGithub size={20} />
+            {NAV_CTA.label}
           </a>
         </nav>
-
-        <button
-          onClick={toggleMenu}
-          className="md:hidden text-white p-2 hover:bg-white/10 rounded-lg transition-colors"
-          aria-label="Toggle menu"
-        >
-          {isOpen ? <X size={24} /> : <Menu size={24} />}
-        </button>
       </div>
-
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: 'auto' }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3, ease: 'easeInOut' }}
-            className="md:hidden bg-indigo-950/95 backdrop-blur-xl border-b border-indigo-400/20 overflow-hidden"
-          >
-            <div className="px-4 py-6">
-              <nav className="flex flex-col gap-4">
-                {NAV_LINKS.map(({ href, label }) => {
-                  const isAnchor = href.startsWith('#');
-                  const isActive = isAnchor ? false : pathname === href;
-
-                  if (isAnchor) {
-                    return (
-                      <a
-                        key={href}
-                        href={href}
-                        onClick={(e) => {
-                          handleAnchorClick(e, href, pathname, router);
-                          closeMenu();
-                        }}
-                        className={cn(
-                          'text-lg font-medium transition-colors hover:text-white',
-                          isActive ? 'text-white' : 'text-indigo-200/80'
-                        )}
-                      >
-                        {label}
-                      </a>
-                    );
-                  }
-
-                  return (
-                    <Link
-                      key={href}
-                      href={href}
-                      onClick={closeMenu}
-                      className={cn(
-                        'text-lg font-medium transition-colors hover:text-white',
-                        isActive ? 'text-white' : 'text-indigo-200/80'
-                      )}
-                    >
-                      {label}
-                    </Link>
-                  );
-                })}
-                <a
-                  href="https://github.com/DNikulshin"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-lg text-indigo-200/80 hover:text-white transition-colors flex items-center gap-2"
-                  onClick={closeMenu}
-                >
-                  <SiGithub size={20} /> GitHub
-                </a>
-              </nav>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
     </header>
   );
 }

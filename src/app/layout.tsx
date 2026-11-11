@@ -1,5 +1,5 @@
 import type { Metadata } from 'next';
-import { Inter } from 'next/font/google';
+import { Unbounded, Golos_Text } from 'next/font/google';
 import Script from 'next/script';
 import { Providers } from './providers';
 import { Header } from '@/features/header';
@@ -9,16 +9,28 @@ import '@/styles/globals.css';
 import { ScrollToTop } from '@/features/scroll-to-top';
 import { JsonLd } from '@/features/json-ld';
 
-const inter = Inter({ subsets: ['latin', 'cyrillic'] });
+const golos = Golos_Text({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500', '600'],
+  variable: '--font-golos',
+  display: 'swap',
+});
+
+const unbounded = Unbounded({
+  subsets: ['latin', 'cyrillic'],
+  weight: ['400', '500'],
+  variable: '--font-unbounded',
+  display: 'swap',
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://dnikulshin.github.io'),
   title: {
-    default: 'DNikulshin | Fullstack & AI-разработчик',
-    template: '%s | DNikulshin',
+    default: 'Дмитрий Никульшин — fullstack-разработчик',
+    template: '%s | Дмитрий Никульшин',
   },
   description:
-    'Fullstack-разработчик (TypeScript/Python) с 8-летним опытом. Строю продукты полного цикла, интегрирую AI-решения (LLM/RAG). 10+ проектов в продакшене.',
+    'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам. Код открыт, 12 репозиториев с CI.',
   keywords: [
     'fullstack разработчик',
     'AI интеграция',
@@ -32,9 +44,9 @@ export const metadata: Metadata = {
     'портфолио разработчика',
   ],
   openGraph: {
-    title: 'DNikulshin | Fullstack & AI-разработчик',
+    title: 'Дмитрий Никульшин — fullstack-разработчик',
     description:
-      'Строю продукты полного цикла: от идеи до продакшена. Интегрирую AI-решения, создаю масштабируемые системы.',
+      'TypeScript, Node.js, React, PostgreSQL. Системы, которые работают: телеметрия, документы, доступ к машинам.',
     url: 'https://dnikulshin.github.io',
     siteName: 'DNikulshin',
     locale: 'ru_RU',
@@ -44,7 +56,7 @@ export const metadata: Metadata = {
         url: '/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'DNikulshin – Fullstack & AI-разработчик',
+        alt: 'Дмитрий Никульшин — fullstack-разработчик',
       },
     ],
   },
@@ -67,7 +79,11 @@ export const metadata: Metadata = {
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="ru" className="scroll-smooth dark" data-scroll-behavior="smooth">
+    <html
+      lang="ru"
+      className={`scroll-smooth ${golos.variable} ${unbounded.variable}`}
+      data-scroll-behavior="smooth"
+    >
       <head>
         <JsonLd />
         {/* Оптимизированное подключение Яндекс.Метрики */}
@@ -125,11 +141,11 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
           </div>
         </noscript>
       </head>
-      <body className={inter.className}>
+      <body>
         <Providers>
           <GlobalErrorBoundary>
             <Header />
-            <main className="pt-16">{children}</main>
+            <main id="main">{children}</main>
             <Footer />
             <ScrollToTop />
           </GlobalErrorBoundary>

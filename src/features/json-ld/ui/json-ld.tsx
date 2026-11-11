@@ -13,9 +13,9 @@ export function JsonLd() {
         '@type': 'Person',
         name: 'DNikulshin',
         alternateName: 'Дмитрий Никульшин',
-        jobTitle: 'Fullstack & AI Developer',
+        jobTitle: 'Fullstack-разработчик',
         description:
-          'Fullstack-разработчик с 8-летним опытом. Специализируюсь на создании сложных веб-приложений и интеграции AI-решений (LLM, RAG).',
+          'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам.',
         url: 'https://dnikulshin.github.io',
         image: 'https://dnikulshin.github.io/og-image.jpg',
         sameAs: [
@@ -44,9 +44,9 @@ export function JsonLd() {
       // 2. WebSite
       {
         '@type': 'WebSite',
-        name: 'DNikulshin | Fullstack & AI-разработчик',
+        name: 'Дмитрий Никульшин — fullstack-разработчик',
         description:
-          'Портфолио Fullstack-разработчика с опытом в создании продуктов полного цикла и AI-интеграциях.',
+          'Портфолио fullstack-разработчика: системы телеметрии, документов и удалённого доступа.',
         url: 'https://dnikulshin.github.io',
         inLanguage: 'ru-RU',
         potentialAction: {
