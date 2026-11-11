@@ -17,6 +17,18 @@
   --color-rule: #bcc3b8;
   --color-signal: #9c3a1b;
 
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-foreground: var(--foreground);
+  --color-background: var(--background);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --color-destructive: var(--destructive);
+
   --font-sans: var(--font-golos);
   --font-display: var(--font-unbounded);
 
@@ -98,15 +110,27 @@
    несобытийный жест на странице. Отключается системной настройкой. */
 @media (prefers-reduced-motion: no-preference) {
   .system-dot {
-    animation: system-flow 7s linear infinite;
+    animation: system-flow-x 7s linear infinite;
+  }
+  .system-dot-v {
+    animation: system-flow-y 6s linear infinite;
   }
 }
 
-@keyframes system-flow {
+@keyframes system-flow-x {
   from {
     transform: translateX(0);
   }
   to {
     transform: translateX(290px);
+  }
+}
+
+@keyframes system-flow-y {
+  from {
+    transform: translateY(0);
+  }
+  to {
+    transform: translateY(120px);
   }
 }

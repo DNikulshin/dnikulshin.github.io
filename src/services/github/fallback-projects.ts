@@ -36,6 +36,23 @@ export const FALLBACK_PROJECTS: Repository[] = [
     },
   },
   {
+    name: 'pc-remote',
+    description:
+      'Удалённое управление парком Windows-машин: питание, громкость, скриншоты, расписание. Клиент ставится как служба, сервер держит очередь команд.',
+    url: 'https://github.com/DNikulshin/pc-remote',
+    stargazerCount: 0,
+    forkCount: 0,
+    primaryLanguage: { name: 'TypeScript', color: '#3178C6' },
+    updatedAt: '2025-05-04T00:00:00Z',
+    repositoryTopics: {
+      nodes: [
+        { topic: { name: 'windows' } },
+        { topic: { name: 'remote-control' } },
+        { topic: { name: 'typescript' } },
+      ],
+    },
+  },
+  {
     name: 'scan-agent',
     description:
       'AI-агент для автоматического мониторинга фриланс-бирж. Парсит заказы (Playwright), оценивает их нейросетью (DeepSeek), генерирует персонализированные отклики и отправляет уведомления в Telegram. Все заказы синхронизируются в облако (Supabase) и доступны через PWA-дашборд.',

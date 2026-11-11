@@ -85,9 +85,25 @@ const MOBILE_SCHEME = (
     role="img"
     aria-label="Схема: телефон водителя передаёт координаты по WebSocket в Fastify, состояние публикуется в Redis Pub/Sub и уходит диспетчеру; история пишется в PostgreSQL."
   >
+    <defs>
+      <marker
+        id="system-arrow-v"
+        viewBox="0 0 8 8"
+        refX="6"
+        refY="4"
+        markerWidth="7"
+        markerHeight="7"
+        orient="auto"
+      >
+        <path d="M0 0 L8 4 L0 8 z" fill="#7C8880" />
+      </marker>
+    </defs>
+
+    {/* вертикальная шина справа: точка едет по ней и не пересекает блоки */}
     <g stroke="#7C8880" fill="none" strokeWidth="1.3">
-      <path d="M110 60 V96 M110 148 V184 M110 236 V272" />
-      <path d="M210 122 H300 V352 H150 V396" strokeDasharray="3 4" />
+      <path d="M300 24 V440" markerEnd="url(#system-arrow-v)" />
+      <path d="M210 34 H300 M210 122 H300 M210 210 H300 M210 298 H300" />
+      <path d="M250 122 V420 H210" strokeDasharray="3 4" />
     </g>
 
     <g fill="#F2F4EE" stroke="#8E9A90" strokeWidth="1.1">
@@ -132,7 +148,7 @@ const MOBILE_SCHEME = (
         история треков
       </text>
     </g>
-    <circle className="system-dot" cx="110" cy="62" r="3.2" fill="#9C3A1B" />
+    <circle className="system-dot-v" cx="300" cy="34" r="3.2" fill="#9C3A1B" />
   </svg>
 );
 

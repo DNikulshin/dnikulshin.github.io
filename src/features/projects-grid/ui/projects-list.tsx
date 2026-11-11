@@ -53,6 +53,15 @@ export function ProjectsList({ repos, limit = 5, showExtras = true }: ProjectsLi
               ))}
             </ul>
           )}
+
+          <p className="mt-6">
+            <a
+              href="/projects"
+              className="inline-flex min-h-8 items-center border-b border-rule text-[15px] hover:border-signal hover:text-signal"
+            >
+              Все проекты и репозитории →
+            </a>
+          </p>
         </div>
       </div>
     </section>

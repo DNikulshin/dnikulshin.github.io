@@ -48,7 +48,7 @@ export async function fetchPinnedRepos(): Promise<Repository[]> {
 
     if (!res.ok) {
       console.warn(`GitHub API error: ${res.status}. Using fallback data.`);
-      return FALLBACK_PROJECTS;
+      return orderRepos(FALLBACK_PROJECTS);
     }
 
     const json = await res.json();
@@ -66,12 +66,12 @@ export async function fetchPinnedRepos(): Promise<Repository[]> {
     const repos = orderRepos([...byName.values()]);
     if (repos.length === 0) {
       console.warn('No repos found. Using fallback data.');
-      return FALLBACK_PROJECTS;
+      return orderRepos(FALLBACK_PROJECTS);
     }
     return repos;
   } catch (error) {
     console.warn('Failed to fetch pinned repos:', error);
     console.warn('Using fallback data.');
-    return FALLBACK_PROJECTS;
+    return orderRepos(FALLBACK_PROJECTS);
   }
 }
