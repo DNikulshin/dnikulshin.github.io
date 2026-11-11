@@ -1,9 +1,20 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
+import {
+  SITE_DESCRIPTION,
+  SITE_EMAIL,
+  SITE_GITHUB,
+  SITE_NAME,
+  SITE_OG_IMAGE,
+  SITE_TELEGRAM,
+  SITE_URL,
+} from '@/shared/config/site';
 
 export function JsonLd() {
   const pathname = usePathname();
+  // trailingSlash: true — Next отдаёт '/projects/', поэтому хвостовой слэш отбрасываем
+  const path = pathname.replace(/\/+$/, '') || '/';
 
   const schemas = {
     '@context': 'https://schema.org',
@@ -11,18 +22,15 @@ export function JsonLd() {
       // 1. Person
       {
         '@type': 'Person',
-        name: 'DNikulshin',
-        alternateName: 'Дмитрий Никульшин',
+        '@id': `${SITE_URL}/#person`,
+        name: SITE_NAME,
+        alternateName: 'DNikulshin',
         jobTitle: 'Fullstack-разработчик',
-        description:
-          'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам.',
-        url: 'https://dnikulshin.github.io',
-        image: 'https://dnikulshin.github.io/og-image.jpg',
-        sameAs: [
-          'https://github.com/DNikulshin',
-          'https://t.me/dnikulshin_dev',
-          'https://linkedin.com/in/dnikulshin',
-        ],
+        description: SITE_DESCRIPTION,
+        url: SITE_URL,
+        image: SITE_OG_IMAGE,
+        email: SITE_EMAIL,
+        sameAs: [SITE_GITHUB, SITE_TELEGRAM],
         knowsAbout: [
           'React',
           'Next.js',
@@ -31,7 +39,6 @@ export function JsonLd() {
           'NestJS',
           'LLM',
           'RAG',
-          'LangChain',
           'PostgreSQL',
           'Docker',
           'GitHub Actions',
@@ -47,13 +54,9 @@ export function JsonLd() {
         name: 'Дмитрий Никульшин — fullstack-разработчик',
         description:
           'Портфолио fullstack-разработчика: системы телеметрии, документов и удалённого доступа.',
-        url: 'https://dnikulshin.github.io',
+        url: SITE_URL,
         inLanguage: 'ru-RU',
-        potentialAction: {
-          '@type': 'SearchAction',
-          target: 'https://dnikulshin.github.io/search?q={search_term_string}',
-          'query-input': 'required name=search_term_string',
-        },
+        author: { '@id': `${SITE_URL}/#person` },
       },
       // 3. BreadcrumbList
       {
@@ -63,22 +66,23 @@ export function JsonLd() {
             '@type': 'ListItem',
             position: 1,
             name: 'Главная',
-            item: 'https://dnikulshin.github.io',
+            item: SITE_URL,
           },
-          ...(pathname === '/projects'
+          ...(path === '/projects'
             ? [
                 {
                   '@type': 'ListItem',
                   position: 2,
                   name: 'Проекты',
-                  item: 'https://dnikulshin.github.io/projects',
+                  item: `${SITE_URL}/projects/`,
                 },
               ]
             : []),
         ],
       },
       // 4. ItemList (только на главной и /projects)
-      ...(pathname === '/' || pathname === '/projects'
+      // ItemList главной страницы; на /projects список даёт ProjectsJsonLd с данными GitHub
+      ...(path === '/'
         ? [
             {
               '@type': 'ItemList',
@@ -92,10 +96,10 @@ export function JsonLd() {
                     '@type': 'CreativeWork',
                     name: 'docbrain',
                     description:
-                      'AI-консультант по документации с RAG (pgvector), agent с function calling, синхронизация через n8n. Стек: FastAPI, Next.js, PostgreSQL, MinIO, Authelia.',
+                      'Поиск по внутренней документации: RAG на pgvector, парсеры PDF, DOCX, Markdown и URL, эмбеддинги через OpenRouter, MinIO, импорт из Google Drive через n8n. Стек: FastAPI, SQLAlchemy, PostgreSQL.',
                     url: 'https://github.com/DNikulshin/docbrain',
                     dateCreated: '2025-05-18',
-                    keywords: ['AI', 'RAG', 'Python', 'FastAPI'],
+                    keywords: ['AI', 'RAG', 'Python', 'FastAPI', 'pgvector'],
                   },
                 },
                 {

@@ -1,3 +1,0 @@
-User-agent: *
-Allow: /
-Sitemap: https://dnikulshin.github.io/sitemap.xml
