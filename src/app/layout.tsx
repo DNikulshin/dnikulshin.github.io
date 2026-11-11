@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { Unbounded, Golos_Text } from 'next/font/google';
 import Script from 'next/script';
-import { Providers } from './providers';
 import { Header } from '@/features/header';
 import { Footer } from '@/features/footer';
 import { GlobalErrorBoundary } from '@/shared/ui/global-error-boundary';
@@ -142,14 +141,12 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         </noscript>
       </head>
       <body>
-        <Providers>
-          <GlobalErrorBoundary>
-            <Header />
-            <main id="main">{children}</main>
-            <Footer />
-            <ScrollToTop />
-          </GlobalErrorBoundary>
-        </Providers>
+        <GlobalErrorBoundary>
+          <Header />
+          <main id="main">{children}</main>
+          <Footer />
+          <ScrollToTop />
+        </GlobalErrorBoundary>
       </body>
     </html>
   );
