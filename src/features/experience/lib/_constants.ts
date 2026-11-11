@@ -35,7 +35,7 @@ export const EXPERIENCE: ExperienceEntry[] = [
     facts: [
       { label: 'Темы', value: 'телеметрия · документы · доступ к машинам' },
       { label: 'Стек', value: 'TypeScript · Python · PostgreSQL · Docker' },
-      { label: 'Проверка', value: '12 репозиториев с CI, в 10 есть тесты' },
+      { label: 'Проверка', value: '12 репозиториев с Actions, 8 с CI, 11 с тестами' },
     ],
   },
 ];

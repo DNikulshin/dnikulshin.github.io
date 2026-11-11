@@ -4,7 +4,8 @@ export const HERO_TITLE =
 export const HERO_LEDE_BEFORE =
   'Дмитрий Никульшин. Fullstack: TypeScript, Node.js, React, PostgreSQL. Полтора года в найме, два года — свои системы.';
 
-export const HERO_LEDE_PROOF = 'Проверить можно по коду: 12 репозиториев с CI, в 10 есть тесты.';
+export const HERO_LEDE_PROOF =
+  'Проверить можно по коду: 12 репозиториев с GitHub Actions, в 11 есть тесты.';
 
 export const HERO_ACTIONS = [
   { href: '#projects', label: 'Смотреть проекты', variant: 'solid' },
