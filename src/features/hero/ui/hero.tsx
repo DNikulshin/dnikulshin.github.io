@@ -1,108 +1,51 @@
-'use client';
-import dynamic from 'next/dynamic';
-import { scrollToElement } from '@/shared/lib/scroll';
-import { Button } from '@/shared/ui/kit/button';
-import { ArrowRight, Send } from 'lucide-react';
-import { SiGithub } from 'react-icons/si';
-import { motion } from 'framer-motion';
-import { useHeroAnimation } from '../model/_use-hero-animation';
-import { HERO_TITLE, HERO_SUBTITLE_LINE_1, HERO_SUBTITLE_LINE_2 } from '../lib/_constants';
-
-// Динамическая загрузка частиц (не нужны при SSR)
-const ParticlesBackground = dynamic(
-  () => import('./particles-background').then((mod) => mod.ParticlesBackground),
-  { ssr: false }
-);
+import {
+  HERO_ACTIONS,
+  HERO_ASIDE,
+  HERO_LEDE_BEFORE,
+  HERO_LEDE_PROOF,
+  HERO_TITLE,
+} from '../lib/_constants';
+import { SystemMap } from '@/features/system-map';
+import { cn } from '@/shared/lib/css';
 
 export function Hero() {
-  const { titleRef, subtitleRef } = useHeroAnimation();
-
   return (
-    <section className="relative min-h-[calc(100vh-4rem)] flex items-center justify-center bg-linear-to-br from-indigo-950 via-slate-900 to-slate-950 text-white px-4 overflow-hidden pt-16">
-      {/* Декоративное свечение */}
-      <ParticlesBackground />
+    <section className="wrap pt-[clamp(32px,6vw,76px)]">
+      <h1 className="mb-[clamp(20px,3vw,34px)] max-w-[24ch] text-[clamp(27px,3.9vw,48px)]">
+        {HERO_TITLE}
+      </h1>
 
-      <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,var(--tw-gradient-stops))] from-indigo-500/10 via-transparent to-transparent pointer-events-none" />
+      <div className="grid items-end gap-6 pb-[clamp(24px,3.5vw,40px)] md:grid-cols-[minmax(0,1fr)_minmax(0,15rem)] md:gap-10">
+        <div>
+          <p className="mb-7 max-w-[46ch] text-[clamp(16px,1.35vw,19px)] text-muted">
+            {HERO_LEDE_BEFORE} <strong className="font-medium text-ink">{HERO_LEDE_PROOF}</strong>
+          </p>
 
-      <div className="max-w-4xl mx-auto text-center relative z-10">
-        <h1 ref={titleRef} className="text-4xl md:text-6xl font-bold mb-6 leading-tight">
-          {HERO_TITLE}
-        </h1>
-        <br />
-        <p ref={subtitleRef} className="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-          {HERO_SUBTITLE_LINE_1}
-          <br />
-          {HERO_SUBTITLE_LINE_2}
-        </p>
-        <div className="flex flex-wrap gap-3 justify-center">
-          <Button
-            variant="default"
-            onClick={() => scrollToElement('contact')}
-            className="h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
-          >
-            Связаться <Send className="ml-2 h-4 w-4" />
-          </Button>
-
-          <Button
-            variant="outline"
-            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
-            render={<a href="/projects" />}
-          >
-            Проекты <ArrowRight className="ml-2 h-4 w-4" />
-          </Button>
-
-          <Button
-            variant="outline"
-
-            className="border-white/20 text-white bg-transparent hover:bg-white/10 hover:text-white h-9 px-3 text-sm sm:h-10 sm:px-4 md:h-11 md:px-6 md:text-base cursor-pointer"
-            render={
+          <div className="flex flex-wrap items-center gap-x-5 gap-y-3">
+            {HERO_ACTIONS.map(({ href, label, variant }) => (
               <a
-                href="https://github.com/DNikulshin"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-inherit flex items-center"
-                aria-label="GitHub"
-              />
-            }
-          >
-            <SiGithub className="h-4 w-4 sm:mr-2" aria-hidden="true" />
-            <span className="hidden sm:inline">GitHub</span>
-          </Button>
+                key={href}
+                href={href}
+                className={cn(
+                  'inline-flex min-h-11 items-center px-5 text-[15px]',
+                  variant === 'solid'
+                    ? 'rounded-[2px] bg-ink font-medium text-sheet hover:bg-black'
+                    : 'border-b border-rule pb-1 hover:border-ink'
+                )}
+              >
+                {label}
+              </a>
+            ))}
+          </div>
         </div>
+
+        <p className="border-t border-rule pt-3 text-[13.5px] text-muted md:border-t-0 md:border-l md:pt-0 md:pl-3.5">
+          <strong className="mb-1 block font-medium text-ink">{HERO_ASIDE.label}</strong>
+          {HERO_ASIDE.text}
+        </p>
       </div>
 
-      {/* Стрелка вниз */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 hidden sm:block"
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2 }}
-      >
-        <a
-          href="#projects"
-          onClick={(e) => {
-            e.preventDefault();
-            document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' });
-            window.history.pushState(null, '', '#projects');
-          }}
-          className="block text-gray-400 hover:text-white transition-colors"
-          aria-label="Scroll to projects"
-        >
-          <svg
-            className="w-6 h-6"
-            fill="none"
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M19 14l-7 7m0 0l-7-7m7 7V3"
-            />
-          </svg>
-        </a>
-      </motion.div>
+      <SystemMap />
     </section>
   );
 }

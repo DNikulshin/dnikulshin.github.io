@@ -1,6 +1,17 @@
-export const HERO_TITLE = 'Разрабатываю fullstack-приложения и интегрирую AI-решения';
+export const HERO_TITLE =
+  'Системы, которые работают: телеметрия транспорта, документы, доступ к машинам';
 
-export const HERO_SUBTITLE_LINE_1 = 'Автономный TypeScript/Python разработчик.';
+export const HERO_LEDE_BEFORE =
+  'Дмитрий Никульшин. Fullstack: TypeScript, Node.js, React, PostgreSQL. Полтора года в найме, два года — свои системы.';
 
-export const HERO_SUBTITLE_LINE_2 =
-  'От интерактивного фронтенда до продакшен-инфраструктуры и LLM/RAG систем.';
+export const HERO_LEDE_PROOF = 'Проверить можно по коду: 12 репозиториев с CI, в 10 есть тесты.';
+
+export const HERO_ACTIONS = [
+  { href: '#projects', label: 'Смотреть проекты', variant: 'solid' },
+  { href: '#contact', label: 'Написать', variant: 'quiet' },
+] as const;
+
+export const HERO_ASIDE = {
+  label: 'Сейчас',
+  text: 'RAG-консультант по документам и агент для фриланс-бирж — оба с CI и тестами.',
+} as const;

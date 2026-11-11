@@ -1,127 +1,86 @@
-# 🌐 DNikulshin — Портфолио Fullstack & AI-разработчика
+# Дмитрий Никульшин — портфолио fullstack-разработчика
 
-[![GitHub deployments](https://img.shields.io/github/deployments/DNikulshin/DNikulshin.github.io/github-pages?label=Deploy%20status&style=flat-square)](https://dnikulshin.github.io/)
+[![Deploy](https://img.shields.io/github/deployments/DNikulshin/DNikulshin.github.io/github-pages?label=deploy&style=flat-square)](https://dnikulshin.github.io/)
 [![CI](https://img.shields.io/github/actions/workflow/status/DNikulshin/DNikulshin.github.io/ci.yml?label=CI&style=flat-square)](https://github.com/DNikulshin/DNikulshin.github.io/actions/workflows/ci.yml)
-[![Lighthouse Performance](https://img.shields.io/badge/Performance-100-brightgreen?style=flat-square)](https://pagespeed.web.dev/analysis?url=https://dnikulshin.github.io/)
-[![Lighthouse Accessibility](https://img.shields.io/badge/Accessibility-99-brightgreen?style=flat-square)](https://pagespeed.web.dev/analysis?url=https://dnikulshin.github.io/)
-[![Lighthouse Best Practices](https://img.shields.io/badge/Best%20Practices-100-brightgreen?style=flat-square)](https://pagespeed.web.dev/analysis?url=https://dnikulshin.github.io/)
-[![Lighthouse SEO](https://img.shields.io/badge/SEO-100-brightgreen?style=flat-square)](https://pagespeed.web.dev/analysis?url=https://dnikulshin.github.io/)
 
-Профессиональное портфолио Fullstack & AI-разработчика. Сайт демонстрирует опыт, проекты, навыки и контакты. Адаптивный, оптимизированный, с тёмной темой и анимациями.
+Живой сайт: **https://dnikulshin.github.io/**
 
-👉 [**Посмотреть сайт**](https://dnikulshin.github.io/)
+Портфолио построено вокруг одного принципа: вместо обещаний — то, что можно открыть и проверить.
+Проекты собраны не в карточки, а в записи с разбором: что делает система, на чём написана,
+чем подтверждена (CI, тесты, лицензия).
 
----
+## Что на странице
 
-## 📦 Технологический стек
+| Секция       | Задача                                                                       |
+| ------------ | ---------------------------------------------------------------------------- |
+| Первый экран | Схема реальной системы (телеметрия автопарка) вместо декоративного градиента |
+| Цифры        | Стаж и открытый код: 12 репозиториев с CI, 10 с тестами                      |
+| Опыт         | Коммерческий опыт и свои системы, без выдуманных метрик                      |
+| Проекты      | Пять записей со спецификацией + остальные строками                           |
+| Подход       | Три правила, которые повторяются в проектах                                  |
+| Контакты     | Telegram и почта, без форм-посредников                                       |
 
-| Категория                | Технологии                  |
-| ------------------------ | --------------------------- |
-| **Фреймворк**            | Next.js 16 (App Router)     |
-| **Язык**                 | TypeScript (strict)         |
-| **Стили**                | Tailwind CSS 4              |
-| **UI-библиотека**        | shadcn/ui (Radix UI)        |
-| **Анимации**             | Framer Motion, GSAP         |
-| **Управление данными**   | TanStack Query              |
-| **Валидация**            | Zod                         |
-| **Тестирование**         | Jest, React Testing Library |
-| **CI/CD**                | GitHub Actions              |
-| **Хостинг**              | GitHub Pages                |
-| **Аналитика**            | Яндекс.Метрика              |
-| **Форма обратной связи** | Formspree                   |
+## Стек
 
----
+| Категория    | Технологии                                                  |
+| ------------ | ----------------------------------------------------------- |
+| Фреймворк    | Next.js 16 (App Router), статический экспорт                |
+| Язык         | TypeScript (strict)                                         |
+| Стили        | Tailwind CSS 4                                              |
+| Данные       | GitHub GraphQL API (закреплённые репозитории + `pc-remote`) |
+| Шрифты       | Unbounded (заголовки), Golos Text (текст) через `next/font` |
+| Тестирование | Jest, Testing Library                                       |
+| CI/CD        | GitHub Actions → GitHub Pages                               |
+| Аналитика    | Яндекс.Метрика                                              |
 
-## ✨ Ключевые особенности
-
-- ✅ **Адаптивный дизайн** — корректно отображается на всех устройствах.
-- ✅ **Тёмная тема** — с акцентами в гамме индиго.
-- ✅ **Анимированные секции** — плавное появление при скролле.
-- ✅ **Динамические проекты** — данные загружаются через GitHub API.
-- ✅ **SEO-оптимизация** — метаданные, Open Graph, sitemap, robots.txt.
-- ✅ **Микроразметка JSON-LD** — улучшает видимость в поиске.
-- ✅ **Форма обратной связи** — отправка сообщений через Formspree.
-- ✅ **Высокая производительность** — Lighthouse: 100/99/100/100.
-- ✅ **Профессиональный CI/CD** — автоматическая проверка и деплой.
-
----
-
-## 🚀 Быстрый старт
-
-### Установка и запуск
+## Запуск
 
 ```bash
-# Клонируйте репозиторий
-git clone https://github.com/DNikulshin/DNikulshin.github.io.git
-cd DNikulshin.github.io
-
-# Установите зависимости (используется pnpm)
 pnpm install
-
-# Запустите в режиме разработки
-pnpm dev
-
-# Соберите статический сайт
-pnpm build
-
-# Запустите тесты
-pnpm test
-Переменные окружения
-Создайте файл .env.local в корне проекта:
-
-env
-GITHUB_TOKEN=ваш_github_personal_access_token
-NEXT_PUBLIC_FORMSPREE_ENDPOINT=https://formspree.io/f/ваш_id
-Примечание: GITHUB_TOKEN необходим для доступа к GitHub API (чтение закреплённых репозиториев). Токен используется только во время сборки (на сервере).
-
-🏗️ Архитектура проекта
-
-Проект построен на ED (Evolutionary Design) — модульной архитектуре с чётким разделением ответственности:
-
-text
-src/
-├── app/                # Маршрутизация и глобальные обёртки
-├── features/           # Независимые бизнес-фичи
-│   ├── hero/
-│   ├── about/
-│   ├── skills/
-│   ├── projects-grid/
-│   ├── contact/
-│   ├── header/
-│   ├── footer/
-│   └── scroll-to-top/
-├── services/           # Переиспользуемые сервисы (GitHub API и др.)
-├── shared/             # Ядро: UI-кит, утилиты, конфигурация
-└── styles/             # Глобальные стили
-Каждая фича имеет свой index.ts (public API) и приватные файлы с префиксом _.
-
-🧪 Тестирование и качество кода
-
-Линтеры: ESLint + Prettier проверяют код перед каждым коммитом (Husky).
-
-Типизация: TypeScript в строгом режиме.
-
-Тесты: Jest + React Testing Library охватывают сервисы и компоненты.
-
-CI: GitHub Actions автоматически запускает линтер, проверку типов, тесты и сборку при каждом пуше.
-
-🌐 Деплой
-
-GitHub Pages — основной хостинг (автоматический деплой через deploy.yml).
-
-GitLab Pages — альтернативный хостинг (для резервирования, настроен отдельно).
-
-📄 Лицензия
-
-MIT — вы можете свободно использовать этот код для своих целей.
-
-🤝 Контакты
-
-Email: d.nikulshin.dev@gmail.com
-
-Telegram: @dnikulshin_dev
-
-GitHub: DNikulshin
-
-⭐️ Если вам понравился проект, поставьте звезду на GitHub! Это поможет мне в продвижении. Спасибо! 🙌
+pnpm dev          # разработка
+pnpm build        # статический экспорт в out/
+pnpm test         # тесты
+pnpm type-check   # tsc --noEmit
+pnpm lint
 ```
+
+### Переменные окружения
+
+`.env.local` (только для сборки, в браузер не попадает):
+
+```env
+GITHUB_TOKEN=personal_access_token   # чтение закреплённых репозиториев
+```
+
+Без токена сборка падает на валидации env, а рантайм использует `fallback-projects.ts`.
+
+## Структура
+
+```
+src/
+├── app/                 # маршруты и обёртки
+├── features/            # экраны: hero, system-map, facts, experience,
+│                        # projects-grid, approach, contact, header, footer
+├── services/github/     # GraphQL-запрос, порядок проектов, fallback-данные
+├── shared/              # UI-кит, утилиты, конфигурация
+└── styles/              # токены палитры и типографики
+```
+
+Каждая фича отдаёт наружу только `index.ts`; внутренние файлы — с префиксом `_`.
+
+## Дизайн-решения
+
+- Палитра: `sheet #E9EBE4`, `panel #DFE2D8`, `ink #12171A`, `muted #55605C`, `rule #BCC3B8`,
+  `signal #9C3A1B` — сигнальный цвет только для состояний и активных ссылок.
+- Единственный несобытийный жест — точка данных, которая едет по шине на схеме.
+  При `prefers-reduced-motion: reduce` движение отключается.
+- Порядок проектов задаётся в `services/github/_order.ts`, а не настройкой закреплённых
+  репозиториев: карточка не исчезает из-за галочки в профиле.
+
+## Деплой
+
+`main` → CI (`lint`, `type-check`, `test`, `build`) → `deploy.yml` публикует `out/` на GitHub Pages.
+
+## Лицензия
+
+MIT

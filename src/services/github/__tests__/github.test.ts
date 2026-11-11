@@ -1,6 +1,7 @@
 import { fetchPinnedRepos } from '../server';
 import { RepositorySchema } from '../_types';
 import { FALLBACK_PROJECTS } from '../fallback-projects';
+import { orderRepos } from '../_order';
 
 global.fetch = jest.fn();
 
@@ -39,7 +40,7 @@ describe('GitHub Service', () => {
   it('returns fallback data on API error', async () => {
     (fetch as jest.Mock).mockResolvedValue({ ok: false, status: 503 });
     const repos = await fetchPinnedRepos();
-    expect(repos).toEqual(FALLBACK_PROJECTS);
+    expect(repos).toEqual(orderRepos(FALLBACK_PROJECTS));
   }, 10000); // увеличиваем таймаут до 10 секунд
 
   it('returns fallback data when API returns empty list', async () => {
@@ -51,6 +52,6 @@ describe('GitHub Service', () => {
     });
 
     const repos = await fetchPinnedRepos();
-    expect(repos).toEqual(FALLBACK_PROJECTS);
+    expect(repos).toEqual(orderRepos(FALLBACK_PROJECTS));
   });
 });

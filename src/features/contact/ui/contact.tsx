@@ -1,60 +1,25 @@
-'use client';
-
-import { motion } from 'framer-motion';
-import { SiTelegram, SiGithub } from 'react-icons/si';
-import { Mail } from 'lucide-react';
-import { CONTACT_LINKS } from '../lib/_constants';
-import { ContactForm } from './contact-form';
-
-const iconMap = {
-  Telegram: SiTelegram,
-  GitHub: SiGithub,
-  Mail: Mail,
-};
+import { CONTACT_CHANNELS, CONTACT_LEDE, CONTACT_TITLE } from '../lib/_constants';
 
 export function Contact() {
   return (
-    <section
-      id="contact"
-      className="py-24 px-4 bg-linear-to-b from-slate-900 to-slate-950 border-t border-indigo-500/10 scroll-mt-16"
-    >
-      <div className="max-w-4xl mx-auto text-center">
-        <motion.h2
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-3xl font-bold text-white mb-6"
-        >
-          Свяжитесь со мной
-        </motion.h2>
-        <p className="text-gray-400 mb-12">Готов обсудить ваш проект или ответить на вопросы</p>
-
-        {/* Социальные ссылки */}
-        <div className="flex flex-wrap justify-center gap-6 mb-12">
-          {CONTACT_LINKS.map((link, idx) => {
-            const Icon = iconMap[link.icon as keyof typeof iconMap];
-            return (
-              <motion.a
-                key={link.label}
-                href={link.href}
-                target="_blank"
-                rel="noopener noreferrer"
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ delay: idx * 0.1 }}
-                className="flex items-center gap-3 px-6 py-3 bg-slate-800/40 rounded-xl border border-slate-700/50 hover:border-indigo-400/60 hover:bg-slate-800/60 transition-all hover:shadow-lg hover:shadow-indigo-500/10"
-              >
-                <Icon size={20} className="text-indigo-400" aria-hidden="true" />
-                <span className="text-white font-medium">{link.label}</span>
-              </motion.a>
-            );
-          })}
+    <section id="contact" className="border-t border-rule bg-panel">
+      <div className="wrap section-y grid gap-7 md:grid-cols-[1.1fr_0.9fr] md:gap-14">
+        <div>
+          <h2 className="mb-3 text-[clamp(19px,2.2vw,26px)]">{CONTACT_TITLE}</h2>
+          <p className="max-w-[46ch] text-[clamp(16px,1.35vw,19px)] text-muted">{CONTACT_LEDE}</p>
         </div>
 
-        <div className="mt-12">
-          <h3 className="text-xl font-semibold text-white mb-4">Или напишите через форму</h3>
-          <ContactForm />
+        <div className="border-t border-rule">
+          {CONTACT_CHANNELS.map(({ label, value, href }) => (
+            <a
+              key={label}
+              href={href}
+              className="flex min-h-12 items-center justify-between gap-4 border-b border-rule py-3.5 hover:[&_span]:text-signal"
+            >
+              <span className="transition-colors">{label}</span>
+              <em className="text-sm not-italic text-muted">{value} →</em>
+            </a>
+          ))}
         </div>
       </div>
     </section>

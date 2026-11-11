@@ -3,6 +3,8 @@ import { PINNED_REPOS_QUERY } from './_queries';
 import { RepositorySchema, type Repository } from './_types';
 import { FALLBACK_PROJECTS } from './fallback-projects';
 
+import { GITHUB_LOGIN, orderRepos } from './_order';
+
 const MAX_RETRIES = 3;
 const INITIAL_DELAY = 1000;
 
@@ -36,26 +38,40 @@ export async function fetchPinnedRepos(): Promise<Repository[]> {
           Authorization: `Bearer ${serverEnv.GITHUB_TOKEN}`,
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify({ query: PINNED_REPOS_QUERY }),
+        body: JSON.stringify({
+          query: PINNED_REPOS_QUERY,
+          variables: { owner: GITHUB_LOGIN },
+        }),
       },
       MAX_RETRIES
     );
 
     if (!res.ok) {
       console.warn(`GitHub API error: ${res.status}. Using fallback data.`);
-      return FALLBACK_PROJECTS;
+      return orderRepos(FALLBACK_PROJECTS);
     }
 
     const json = await res.json();
-    const repos = json.data.user.pinnedItems.nodes;
-    if (!repos || repos.length === 0) {
-      console.warn('No pinned repos found. Using fallback data.');
-      return FALLBACK_PROJECTS;
+    const user = json.data?.user;
+    const pinned: unknown[] = user?.pinnedItems?.nodes ?? [];
+    const extra: unknown[] = user?.pcRemote ? [user.pcRemote] : [];
+
+    const byName = new Map<string, Repository>();
+    for (const raw of [...pinned, ...extra]) {
+      if (!raw) continue;
+      const repo = RepositorySchema.parse(raw);
+      byName.set(repo.name, repo);
     }
-    return repos.map((repo: unknown) => RepositorySchema.parse(repo));
+
+    const repos = orderRepos([...byName.values()]);
+    if (repos.length === 0) {
+      console.warn('No repos found. Using fallback data.');
+      return orderRepos(FALLBACK_PROJECTS);
+    }
+    return repos;
   } catch (error) {
     console.warn('Failed to fetch pinned repos:', error);
     console.warn('Using fallback data.');
-    return FALLBACK_PROJECTS;
+    return orderRepos(FALLBACK_PROJECTS);
   }
 }
