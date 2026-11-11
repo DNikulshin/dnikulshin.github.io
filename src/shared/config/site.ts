@@ -8,7 +8,7 @@ export const SITE_NAME = 'Дмитрий Никульшин';
 export const SITE_TITLE = 'Дмитрий Никульшин — fullstack-разработчик';
 export const SITE_ROLE = 'fullstack / инфраструктура';
 export const SITE_DESCRIPTION =
-  'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам. Код открыт, 12 репозиториев с CI.';
+  'Fullstack-разработчик: TypeScript, Node.js, React, PostgreSQL. Helpdesk для сервисной службы, телеметрия автопарка, RAG-ассистент по документам. Код открыт: 12 репозиториев с GitHub Actions, в 11 есть тесты.';
 export const SITE_OG_IMAGE = `${SITE_URL}/og-image.jpg`;
 export const SITE_TELEGRAM = 'https://t.me/nikulshin_dev';
 export const SITE_TELEGRAM_HANDLE = '@nikulshin_dev';
