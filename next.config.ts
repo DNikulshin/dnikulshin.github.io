@@ -24,10 +24,9 @@ const nextConfig: NextConfig = {
     unoptimized: true,
   },
 
-  // Пробрасываем переменные окружения для использования на сервере при сборке
-  env: {
-    GITHUB_TOKEN: process.env.GITHUB_TOKEN,
-  },
+  // Секреты здесь не пробрасываем: значения из `env` всегда попадают в JS-бандл
+  // (next-config-js/env), а конфиг сборки остаётся в артефактах. GITHUB_TOKEN
+  // читается на сервере из process.env (src/shared/config/server-env.ts).
 
   // Настройки, которые применяются ТОЛЬКО в режиме разработки
   ...(isDev && {
